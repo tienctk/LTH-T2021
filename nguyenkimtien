@@ -1,0 +1,125 @@
+BT5: Tính điểm trung bình
+class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Nhập vào điểm trung bình: ");
+            double diemTrungBinh = Convert.ToDouble(Console.ReadLine());
+
+            if (diemTrungBinh >= 9.0)
+            {
+                Console.WriteLine("Xuất sắc");
+            }
+            else if (diemTrungBinh >= 8.0)
+            {
+                Console.WriteLine("Giỏi");
+            }
+            else if (diemTrungBinh >= 6.5)
+            {
+                Console.WriteLine("Khá");
+            }
+            else if (diemTrungBinh >= 5.0)
+            {
+                Console.WriteLine("Trung bình");
+            }
+            else if (diemTrungBinh >= 3.5)
+            {
+                Console.WriteLine("Yếu");
+            }
+            else
+            {
+                Console.WriteLine("kém");
+            }
+        }
+    }
+BT6: Quy đổi tiền
+class Program
+    {
+        static int[] menhGia = { 500000, 200000, 100000, 50000 };
+
+        static void Main()
+        {
+            Console.Write("Nhập số tiền cần đổi: ");
+            int soTienCanDoi = Convert.ToInt32(Console.ReadLine());
+
+            int[] soToTien = DoiTien(soTienCanDoi, menhGia);
+
+            InKetQua(soTienCanDoi, soToTien);
+        }
+
+        static int[] DoiTien(int soTien, int[] menhGia)
+        {
+            int[] soToTien = new int[menhGia.Length];
+
+            for (int i = 0; i < menhGia.Length; i++)
+            {
+                soToTien[i] = soTien / menhGia[i];
+                soTien %= menhGia[i];
+            }
+
+            return soToTien;
+        }
+
+        static void InKetQua(int soTien, int[] soToTien)
+        {
+            Console.WriteLine($"{soTien} - {TongSoToTien(soToTien)} tờ:");
+            for (int i = 0; i < soToTien.Length; i++)
+            {
+                if (soToTien[i] > 0)
+                {
+                    Console.Write($"{soToTien[i]} tờ {menhGia[i]}, ");
+                }
+            }
+        }
+
+        static int TongSoToTien(int[] soToTien)
+        {
+            int tong = 0;
+            foreach (var soTo in soToTien)
+            {
+                tong += soTo;
+            }
+            return tong;
+        }
+    }
+BT7: Tính tiền điện
+class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Nhập chỉ số điện p: ");
+            int p = Convert.ToInt32(Console.ReadLine());
+
+            double t = 0;
+
+            if (p <= 50)
+            {
+                t = p * 1484;
+            }
+            else if (p <= 100)
+            {
+                t = 50 * 1484 + (p - 50) * 1533;
+            }
+            else if (p <= 200)
+            {
+                t = 50 * 1484 + 50 * 1533 + (p - 100) * 1786;
+            }
+            else if (p <= 300)
+            {
+                t = 50 * 1484 + 50 * 1533 + 100 * 1786 + (p - 200) * 2242;
+            }
+            else if (p <= 400)
+            {
+                t = 50 * 1484 + 50 * 1533 + 100 * 1786 + 100 * 2242 + (p - 300) * 2503;
+            }
+            else
+            {
+                t = 50 * 1484 + 50 * 1533 + 100 * 1786 + 100 * 2242 + 100 * 2503 + (p - 400) * 2587;
+            }
+
+            double vat = 0.1 * t;
+            double tongTienDien = t + vat;
+
+            Console.WriteLine($"Tổng tiền điện: {tongTienDien} VND");
+        }
+    }
